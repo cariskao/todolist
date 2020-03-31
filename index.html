@@ -6,12 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="images/favicon.ico" rel="shortcut icon">
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/stylesheets/all.css">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+  <link rel="stylesheet" href="./stylesheets/all.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"
+    integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
     crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/regular.js" integrity="sha384-t7yHmUlwFrLxHXNLstawVRBMeSLcXTbQ5hsd0ifzwGtN7ZF7RZ8ppM7Ldinuoiif"
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/regular.js"
+    integrity="sha384-t7yHmUlwFrLxHXNLstawVRBMeSLcXTbQ5hsd0ifzwGtN7ZF7RZ8ppM7Ldinuoiif"
     crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
+    integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
     crossorigin="anonymous"></script>
   <script src="/javascripts/vendor.js"></script>
 
@@ -20,8 +23,8 @@
 <body class="bg-lighter">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="/">Vue.js 練習手冊</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
-      aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
@@ -167,15 +170,18 @@
                   <a class="nav-link" :class="{'active':activeTag=='all'}" @click="activeTag='all'" href="#">全部</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" :class="{'active':activeTag=='active'}" @click="activeTag='active'" href="#">進行中</a>
+                  <a class="nav-link" :class="{'active':activeTag=='active'}" @click="activeTag='active'"
+                    href="#">進行中</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" :class="{'active':activeTag=='completed'}" @click="activeTag='completed'" href="#">已完成</a>
+                  <a class="nav-link" :class="{'active':activeTag=='completed'}" @click="activeTag='completed'"
+                    href="#">已完成</a>
                 </li>
               </ul>
             </div>
             <ul class="list-group list-group-flush text-left">
-              <li class="list-group-item" v-for="(item, index) in filteredTodos" :key="index" @dblclick="editTodo(item)">
+              <li class="list-group-item" v-for="(item, index) in filteredTodos" :key="index"
+                @dblclick="editTodo(item)">
                 <div class="d-flex" v-if="item.id !== editingTodoObject.id">
                   <div class="form-check">
                     <input type="checkbox" class="form-check-input" v-model="item.completed" :id="item.id">
@@ -188,8 +194,8 @@
                   </button>
                 </div>
 
-                <input type="text" class="form-control" v-if="item.id === editingTodoObject.id" v-model="editingTodoTitle"
-                  @keyup.esc="cancelEdit" @keyup.enter="doneEdit(item)">
+                <input type="text" class="form-control" v-if="item.id === editingTodoObject.id"
+                  v-model="editingTodoTitle" @keyup.esc="cancelEdit" @keyup.enter="doneEdit(item)">
               </li>
             </ul>
             <div class="card-footer d-flex justify-content-between">
@@ -206,20 +212,20 @@
             data: {
               newTodo: '',
               todos: [{
-                  id: "todo1",
-                  title: "todo 1",
-                  completed: false
-                },
-                {
-                  id: "todo2",
-                  title: "todo 2",
-                  completed: true
-                },
-                {
-                  id: "todo3",
-                  title: "todo 3",
-                  completed: false
-                }
+                id: "todo1",
+                title: "todo 1",
+                completed: false
+              },
+              {
+                id: "todo2",
+                title: "todo 2",
+                completed: true
+              },
+              {
+                id: "todo3",
+                title: "todo 3",
+                completed: false
+              }
               ],
               editingTodoObject: {}, // 點擊二下要編輯時前,先將被點擊的物件存放到這裡,所以是用{},不是[]
               editingTodoTitle: '', // 點擊二下編輯標題時,要將原先要編輯的內容顯示出來(下方input)
