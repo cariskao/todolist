@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Todo 範例製作</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="images/favicon.ico" rel="shortcut icon">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/stylesheets/all.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"
+		integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+		crossorigin="anonymous"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/regular.js"
+		integrity="sha384-t7yHmUlwFrLxHXNLstawVRBMeSLcXTbQ5hsd0ifzwGtN7ZF7RZ8ppM7Ldinuoiif"
+		crossorigin="anonymous"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
+		integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
+		crossorigin="anonymous"></script>
+	<script src="/javascripts/vendor.js"></script>
+
+</head>
+
+<body class="bg-lighter">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="/">Vue.js 練習手冊</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+			aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/basic/dev.html">基礎教學</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/template/basic.html">模板指令</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/components/basic.html">組件</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/api/vue_set.html">常用 API</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/es6/let_const.html">ES6</a>
+				</li>
+
+			</ul>
+		</div>
+	</nav>
+	<div class="container my-5">
+		<div class="row">
+
+			<div class="col-md-3">
+
+				<div>
+					<h6 class="text-capitalize text-muted">basic</h6>
+
+
+					<a href="/basic/dev.html" class="btn btn-block btn-link">
+						Vue 的開發環境
+					</a>
+
+
+
+					<a href="/basic/instant.html" class="btn btn-block btn-link">
+						建立 Vue 的應用程式
+					</a>
+
+
+
+					<a href="/basic/mvvm.html" class="btn btn-block btn-link">
+						MVVM 是什麼樣的概念
+					</a>
+
+
+
+					<a href="/basic/directive.html" class="btn btn-block btn-link">
+						指令
+					</a>
+
+
+
+					<a href="/basic/if_for.html" class="btn btn-block btn-link">
+						模板語法的延伸 v-if 及 v-for
+					</a>
+
+
+
+					<a href="/basic/v_on.html" class="btn btn-block btn-link">
+						處理互動式行為 v-on 指令
+					</a>
+
+
+
+					<a href="/basic/defined_var.html" class="btn btn-block btn-link">
+						預先定義資料結構
+					</a>
+
+
+
+					<a href="/basic/modifiers.html" class="btn btn-block btn-link">
+						修飾符 與 縮寫
+					</a>
+
+
+
+					<a href="/basic/v_class.html" class="btn btn-block btn-link">
+						切換 Class
+					</a>
+
+
+
+					<a href="/basic/computed.html" class="btn btn-block btn-link">
+						計算屬性
+					</a>
+
+
+
+					<a href="/basic/form.html" class="btn btn-block btn-link">
+						表單雙向綁定
+					</a>
+
+
+
+					<a href="/basic/components.html" class="btn btn-block btn-link">
+						元件化
+					</a>
+
+
+
+					<a href="/basic/todo.html" class="btn btn-block btn-primary active">
+						Todo 範例練習
+					</a>
+
+
+
+					<a href="/basic/v_lifecycle.html" class="btn btn-block btn-link">
+						延伸介紹 - Vue 生命週期
+					</a>
+
+
+				</div>
+			</div>
+
+			<div class="col-md-9 post">
+				<!-- 練習開始 -->
+				<h1 class="mt-0 text-muted">Todo 範例製作</h1>
+
+				<div class="alert alert-secondary">
+					<ol class="mb-0">
+						<li>請跟隨課程完成此章節。</li>
+					</ol>
+				</div>
+
+				<div id="app">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">待辦事項</span>
+						</div>
+						<!-- 也加上按下enter會自動執行addTodo -->
+						<input type="text" class="form-control" placeholder="準備要做的任務" v-model="newTodo"
+							@keyup.enter="addTodo">
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="button" @click="addTodo">新增</button>
+						</div>
+					</div>
+					<div class="card text-center">
+						<div class="card-header">
+							<ul class="nav nav-tabs card-header-tabs">
+								<li class="nav-item">
+									<!-- 原本的code,這裡加上了頁籤切換的功能,但還沒有依頁籤顯示出相應內容的功能 -->
+									<!-- <a class="nav-link active" href="#">全部</a> -->
+									<a class="nav-link" :class="{'active':activeTag=='all'}" @click="activeTag='all'"
+										href="#">全部</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" :class="{'active':activeTag=='active'}" @click="activeTag='active'"
+										href="#">進行中</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" :class="{'active':activeTag=='completed'}" @click="activeTag='completed'"
+										href="#">已完成</a>
+								</li>
+							</ul>
+						</div>
+						<ul class="list-group list-group-flush text-left">
+							<!-- 原本的code -->
+							<!-- <li class="list-group-item" v-for="(item, index) in todos" :key="index"> -->
+							<!-- 在HTML中更換迴圈內的指向,就不會動到原本todos的內容,因爲等下會對filteredTodos做操作 -->
+							<li class="list-group-item" v-for="(item, index) in filteredTodos" :key="index"
+								@dblclick="editTodo(item)">
+								<!-- 點擊二下會把物件放入editingTodoObject,並將其id跟原本項目的item.id做比對 -->
+								<!-- 點擊二下前,二個id不會相等,所以項目會顯示出來,而input會隱藏 -->
+								<div class="d-flex" v-if="item.id !== editingTodoObject.id">
+									<div class="form-check">
+										<input type="checkbox" class="form-check-input" v-model="item.completed" :id="item.id">
+										<!-- 製作class name切換的功能(勾選方框時,條件會變爲true),注意:class name要加上單引號,二者之間要加上「:」,非逗號 -->
+										<!-- 加上刪除線 -->
+										<label class="form-check-label" :for="item.id" :class="{'completed':item.completed}">
+											{{item.title}}
+										</label>
+									</div>
+									<!-- index不是隨機獲取的id值哦,是依照陣列順序產生的索引值,也就是key值(在上方的v-for產生) -->
+									<!-- <button type="button" class="close ml-auto" aria-label="Close" @click="removeTodo(index)"><span aria-hidden="true">&times;</span></button> -->
+
+									<!-- 因原先的index值,也就是key值,是v-for之後產生的索引值,所以當進入「進行中」或「已完成」時,v-for產生的索引值一定會比「全部」頁籤所產生的索引值還少,這樣就會出問題,所以我們改用比對id值的方式來抓取索引值 -->
+									<!-- 在3-24改成傳入從v-for傳進來的item值,也就是value值來比對裡面的id -->
+									<button type="button" class="close ml-auto" aria-label="Close" @click="removeTodo(item)">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<!-- 點擊二下會把物件放入editingTodoObjectd,並將其id跟原本項目的item.id做比對 -->
+								<!-- 因爲點擊二下後,二個id會相等,所以input會顯示出來,而項目會隱藏 -->
+								<!-- 加入顯示預設editingTodoTitle內容 -->
+								<!-- 加入點擊「Esc」取消編輯 -->
+								<!-- 加入點擊「enter」完成編輯 -->
+								<input type="text" class="form-control" v-if="item.id === editingTodoObject.id"
+									v-model="editingTodoTitle" @keyup.esc="cancelEdit" @keyup.enter="doneEdit(item)">
+							</li>
+							<!-- 加入dblclick後,就把這段註解掉 -->
+							<!-- <li class="list-group-item"><input type="text" class="form-control"></li> -->
+						</ul>
+						<div class="card-footer d-flex justify-content-between">
+							<span v-if="this.todos.length > 0">還有 {{this.activeShowValue}} 筆任務未完成</span>
+							<span v-else>現在無任何任務</span>
+							<a href="#" @click="delAll" v-if="todos.length > 0">清除所有任務</a>
+						</div>
+					</div>
+				</div>
+
+				<script>
+					var app = new Vue({
+						el: '#app',
+						data: {
+							newTodo: '',
+							todos: [{
+								id: "todo1",
+								title: "todo 1",
+								completed: false
+							},
+							{
+								id: "todo2",
+								title: "todo 2",
+								completed: true
+							},
+							{
+								id: "todo3",
+								title: "todo 3",
+								completed: false
+							}
+							],
+							editingTodoObject: {}, // 點擊二下要編輯時前,先將被點擊的物件存放到這裡,所以是用{},不是[]
+							editingTodoTitle: '', // 點擊二下編輯標題時,要將原先要編輯的內容顯示出來(下方input)
+							activeTag: 'all' // 要顯示哪一個頁籤
+						},
+						methods: {
+							delAll: function () {
+								this.todos = [] // 注意:這裡一定要用[],不可用{},是移除整個陣列,不是單一物件
+							},
+							addTodo: function () {
+								// 先清除頭尾端的空白鍵
+								var newTitle = this.newTodo.trim()
+
+								// 若沒有內容則無法新增
+								if (!newTitle) {
+									alert('任務內容不可空白!')
+									return;
+								}
+
+								// 需要一個隨機的id
+								var timestamp = Math.floor(Date.now())
+								// console.log(newTitle, timestamp);
+
+								// 將要新增的任務加到todos的後方
+								this.todos.push({
+									id: timestamp,
+									title: newTitle,
+									completed: false
+								})
+								this.newTodo = ''
+							},
+							removeTodo: function (todo) { //原先爲function(index)
+								// 原先的語法與說明：
+								// index不是隨機獲取的id值哦,是依照陣列順序產生的索引值
+								// 在todos陣列上從index開始刪除一筆資料
+								// 在3-24改成傳入被點擊的todo物件本身,也就是從v-for傳進來的item
+								// this.todos.splice(index, 1)
+
+								// 在3-24寫法1:
+								// 改成傳入從v-for傳進來的item值,也就是value值來比對裡面的id
+								// 因原先的index值,也就是key值,是v-for之後產生的索引值,所以當進入「進行中」或「已完成」時,v-for產生的索引值一定會比「全部」頁籤所產生的索引值還少,這樣就會出問題,所以我們改用比對id值的方式來抓取索引值
+								// var newIndex = ''
+
+								// 遍歷todos,並將其value跟key分別放入item和key中
+								// todo的值也是原本todos:[]放入value的item再放回removeTodo(item),這樣就可以將被點擊的該物件id去跟原本todo:[]中全部的id做比對來獲取正確的索引值。
+								/*
+								this.todos.forEach(function (item, key) {
+									if (todo.id === item.id) {
+									newIndex = key
+									}
+								})
+								this.todos.splice(newIndex, 1)
+								*/
+
+								// 3-24寫法2:
+								/*
+								findIndex() 方法返回传入一个测试条件（函数）符合条件的数组第一个元素位置。
+								findIndex() 方法为数组中的每个元素都调用一次函数执行：
+								当数组中的元素在测试条件时返回 true 时, findIndex() 返回符合条件的元素的索引位置，之后的值不会再调用执行函数。
+								如果没有符合条件的元素返回 -1
+								注意: findIndex() 对于空数组，函数是不会执行的。
+								注意: findIndex() 并没有改变数组的原始值。
+								*/
+								var newIndex = this.todos.findIndex(function (item, key) {
+									// console.log(item);
+									// console.log('key:' + key);
+									// console.log('todo id:' + todo.id);
+
+									// 回傳索引位置到newIndex
+									return todo.id === item.id
+								})
+								this.todos.splice(newIndex, 1)
+							},
+							editTodo: function (item) {
+								this.editingTodoObject = item
+								this.editingTodoTitle = item.title
+							},
+							cancelEdit: function () {
+								// 當editingTodoObject=空物件,這樣二個id比對時,item.id !== editingTodoObject.id就會爲true,就可以顯示回項目,而顯示的內容一樣從v-for獲得
+								this.editingTodoObject = {}
+							},
+							doneEdit: function (item) {
+								var newTitle = this.editingTodoTitle.trim()
+
+								if (!newTitle) {
+									alert('任務內容不可空白!')
+									return;
+								}
+								// 因爲<input>有使用v-Model,所以editingTodoTitle會一直呈現最新的值
+								item.title = this.editingTodoTitle
+								this.editingTodoTitle = ''
+								this.editingTodoObject = {} // 讓item.id !== editingTodoObject.id爲true顯示回項目
+							},
+						},
+						// 內存較少
+						computed: {
+							filteredTodosCheck: function () {
+								var activeList = []
+								var completedList = []
+
+								this.todos.forEach(function (value, key) {
+									if (!value.completed) {
+										activeList.push(value)
+									}
+
+									if (value.completed) {
+										completedList.push(value)
+									}
+								})
+
+								this.activeShowValue = activeList.length
+
+								if (this.activeTag == 'active') {
+									return activeList
+								}
+								if (this.activeTag == 'completed') {
+									return completedList
+								}
+							},
+							// 在HTML中更換迴圈內的指向,就不會動到原本todos的內容
+							filteredTodos: function () {
+
+								if (this.activeTag == 'all') {
+
+									this.filteredTodosCheck
+									return this.todos
+
+								} else if (this.activeTag == 'active') {
+									// (未打勾)
+									// 這個空陣列是要來接收todos中,沒有完成的資料內容
+									// var newTodos = []
+									// 遍歷todos的內容並將每項內容放入item中以方便操作
+									/*
+									this.todos.forEach(function (item) {
+									// 如果這個項目是未完成的狀態,就把這個item新增到newTodos[]中
+									if (!item.completed) {
+										newTodos.push(item)
+									}
+									})
+									return newTodos
+									*/
+
+									return this.filteredTodosCheck
+								} else if (this.activeTag == 'completed') { // 或是直接用else,但預防可能還會用別的條件,就寫completed吧
+									// (有打勾)
+									/*
+									var newTodos = []
+									this.todos.forEach(function (item) {
+									if (item.completed) {
+										newTodos.push(item)
+									}
+									})
+									return newTodos
+									*/
+									return this.filteredTodosCheck
+								}
+							},
+						},
+					});
+				</script>
+
+				<style>
+					/* 在文字中加上刪除線的效果 */
+					.completed {
+						text-decoration: line-through
+					}
+				</style>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
